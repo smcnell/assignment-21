@@ -1,11 +1,25 @@
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: sans-serif; }
 
-body {
-  background: limegreen; }
+.etsy-logo {
+  width: 10%; }
 
-h2 {
-  color: maroon;
-  border-bottom: 4px solid maroon; }
+.navbar-container a {
+  display: inline-block;
+  width: 10%;
+  text-decoration: none;
+  color: #afacac;
+  font-size: 14px; }
+
+.navbar-container i {
+  color: black;
+  font-size: 20px; }
+
+.navbar-container {
+  border-top: solid 1px #e5e0e0;
+  border-bottom: solid 1px #e5e0e0;
+  padding: 5px;
+  padding-left: 20px; }
 
 /*# sourceMappingURL=styles.css.map*/
