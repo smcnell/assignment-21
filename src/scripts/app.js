@@ -2,10 +2,9 @@ import $ from 'jquery'
 import Backbone from 'backbone'
 import {ActiveListingsCollection} from './_models.js'
 
-console.log('wired up')
-console.log($)
-console.log(Backbone)
-console.log("HEYYY")
+// console.log('wired up')
+// console.log($)
+// console.log(Backbone)
 
 
 
@@ -26,12 +25,12 @@ const AppRouter = Backbone.Router.extend({
 
 
   showActiveListings: function(){
-    console.log("HEYYY")
 		let activeCollection = new ActiveListingsCollection()
     console.log(activeCollection)
-    console.log("HEY")
+    console.log(activeCollection.models)
 		activeCollection.fetch().then(function(serverRes){
-      console.log(activeCollection)
+      console.log("???")
+      console.log(serverRes)
       let activeCollectionList= activeCollection.results
       console.log(activeCollectionList)
       let viewInstance = new ActiveListingsView()
@@ -47,3 +46,4 @@ const AppRouter = Backbone.Router.extend({
 
 			// viewInstance.render(congressPersonsModelsList, 'root', {})
 		})
+let myEtsyApp = new AppRouter()
