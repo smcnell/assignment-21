@@ -38,7 +38,7 @@ const AppRouter = Backbone.Router.extend({
 
 			viewInstance.render(activeCollectionList)
 		})
-    })
+
 
   },
 
@@ -47,5 +47,3 @@ const AppRouter = Backbone.Router.extend({
 
 			// viewInstance.render(congressPersonsModelsList, 'root', {})
 		})
-  }
-})
