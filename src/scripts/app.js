@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import Backbone from 'backbone'
-import {ActiveListingsCollection, SingleListingsCollection} from './_models.js'
-import {ActiveListingsView, SingleItemView} from './_views.js'
+import {ActiveListingsCollection, SingleListingsCollection, CategoryCollections} from './_models.js'
+import {ActiveListingsView, SingleItemView, CategoryItemsView} from './_views.js'
 // console.log('wired up')
 // console.log($)
 // console.log(Backbone)
@@ -17,6 +17,7 @@ const AppRouter = Backbone.Router.extend({
 
   routes : {
 		'listings/:listing_id' : 'showById',
+    'categories/:category' : 'showByCategory',
 		'' : 'showActiveListings'
 	},
 
@@ -51,8 +52,19 @@ const AppRouter = Backbone.Router.extend({
 
 
     })
-    // let
-  }
+  },
+
+  showByCategory: function(category){
+    let categoryListing = new CategoryCollections(category)
+    categoryListing.fetch().then(function(serverRes){
+      let categoryListingResults= serverRes.results
+      let viewInstance= new CategoryItemsView()
+
+      viewInstance.render(categoryListingResults)
+
+
+    })
+  },
 
 
 		})

@@ -15,11 +15,11 @@ export const ActiveListingsView= Backbone.View.extend({
 
 _eachListingTemplate: function(listOfActive){
   let image = listOfActive.Images
-  let oneImage=image[0]
-  if( oneImage!=="undefined"){
+  var oneImage=image[0]
+  if(typeof oneImage!=="undefined"){
     oneImage=image[0]
   } else {
-    oneImage="null"
+    oneImage=""
   }
   let title=listOfActive.title
     if (title.length > 30){
@@ -81,21 +81,41 @@ export const SingleItemView= Backbone.View.extend({
 _eachPictureTemplate: function(itemObj){
 
   let image = itemObj.Images
-  let oneImage=image[0]
-  let imageTwo=image[1]
-  let imageThree=image[2]
+  let oneImage=image[0].url_fullxfull
+  if(typeof oneImage!=="undefined"){
+    oneImage=image[0].url_fullxfull
+  } else {
+    oneImage=""
+  }
+  var imageTwo=image[1]
+  if(typeof imageTwo!=="undefined"){
+    imageTwo=image[1].url_75x75
+  } else {
+    imageTwo=""
+  }
+  var imageThree=image[2]
+  if(typeof imageThree!=="undefined"){
+    imageThree=image[2].url_75x75
+  } else {
+    imageThree=""
+  }
 
 return `
 <div class= "mylovelyitem">
   <div class="pic-container">
-      <img class="my-single-pic" src="${oneImage.url_fullxfull}" alt="...">
+      <img class="my-single-pic" src="${oneImage}" alt="...">
       </br>
-      <img class="lil-pic" src="${imageTwo.url_75x75}">
-      <img class="lil-pic" src="${imageThree.url_75x75}">
+      <div class= "lil-pic-container">
+        <img class="lil-pic" src="${imageTwo}">
+        <img class="lil-pic" src="${imageThree}">
+      </div>
     </div>
   <div class="my-item-info">
     <h1>${itemObj.title} </h1>
-    <h2> $${itemObj.price} </h2>
+    <div class="price-questions">
+      <h2> $${itemObj.price} </h2>
+      <p>Ask Questions </p>
+    </div>
     <p> ${itemObj.description} </p>
   </div>
 </div>
@@ -121,5 +141,74 @@ console.log(itemObj)
 
   render: function(itemObj){
     this.el.innerHTML=this._buildSingleItemTemplate(itemObj)
+  }
+})
+
+export const CategoryItemsView= Backbone.View.extend({
+  el: '#app-container',
+
+  events: {
+    "click .cat-button" : "handleCatClick"
+  },
+
+  handleCatClick: function(evt){
+    console.log("CLICK")
+    console.log(evt.target)
+    console.log(evt.currentTarget)
+    let target=evt.target
+    catTarget=target.innerHTML.toLowerCase()
+    window.location.hash = `categories/${catTarget}`
+  },
+
+  _eachListingTemplate: function(listOfActive){
+    console.log(listOfActive)
+
+  //   var image = listOfActive.Images
+  //   if (typeof image ==="undefined"){
+  //     image=""
+  //   }
+  //   var oneImage=image[0]
+  //   if(typeof oneImage!=="undefined"){
+  //     oneImage=image[0]
+  //   } else {
+  //     oneImage=""
+  //   }
+  //
+  //   var shopObj= listOfActive.Shop
+  //   if (typeof shopObj==="undefined"){
+  //     shopObj=""
+  //   }
+  //   var shop= listOfActive.Shop.shop_name
+  //   if (typeof shop==="undefined"){
+  //     shop=""
+  //   }
+  //   var title=listOfActive.title
+  //   if (typeof title ==="undefined"){
+  //     title=""
+  //   }
+  //     if (title.length > 30){
+  //       title=title.substr(0,30)+ "..."
+  //     }
+  //
+  // //   console.log(image)
+  // // console.log(oneImage)
+  //   return `
+  //   <div class="col-sm-6 col-md-4 mysize" >
+  //   <div class="thumbnail active-icon" data-itemid="${listOfActive.listing_id}"">
+  //     <img src="${oneImage.url_570xN}" alt="...">
+  //     <div class="caption">
+  //       <h3>${title}</h3>
+  //       <div class="pricename">
+  //         <p class="shoppy">${shop}</p>
+  //         <p class="pricey">$${listOfActive.price}</p>
+  //       </div>
+  //     </div>
+  //   </div>
+  //   </div>
+  //   `
+  },
+  render: function(itemObj){
+    let informationEl= document.querySelector(".information-container")
+    informationEl.innerHTML=this._eachListingTemplate(itemObj)
   }
 })
