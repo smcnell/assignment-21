@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import Backbone from 'backbone'
-import {ActiveListingsCollection, SingleListingsCollection, CategoryCollections} from './_models.js'
-import {ActiveListingsView, SingleItemView, CategoryItemsView} from './_views.js'
+import {ActiveListingsCollection, SingleListingsCollection, CategoryCollections, KeywordCollections} from './_models.js'
+import {ActiveListingsView, SingleItemView, CategoryItemsView, KeywordItemsView, NavBarView} from './_views.js'
 // console.log('wired up')
 // console.log($)
 // console.log(Backbone)
@@ -10,6 +10,8 @@ import {ActiveListingsView, SingleItemView, CategoryItemsView} from './_views.js
 
 const AppRouter = Backbone.Router.extend({
 	initialize: function(){
+    let navInstance = new NavBarView()
+
 		console.log('app routing')
 		Backbone.history.start()
 	},
@@ -18,6 +20,7 @@ const AppRouter = Backbone.Router.extend({
   routes : {
 		'listings/:listing_id' : 'showById',
     'categories/:category' : 'showByCategory',
+    'search/:keyword' : 'showByKeyword',
 		'' : 'showActiveListings'
 	},
 
@@ -26,7 +29,7 @@ const AppRouter = Backbone.Router.extend({
 
   showActiveListings: function(){
 		let activeCollection = new ActiveListingsCollection()//PASS THINGS IN HERE
-		activeCollection.fetch().then(function(serverRes){
+    activeCollection.fetch().then(function(serverRes){
       // console.log(serverRes)
       // console.log("???")
       // console.log(activeCollection)
@@ -66,6 +69,22 @@ const AppRouter = Backbone.Router.extend({
 
     })
   },
+
+  showByKeyword: function(keyword){
+    console.log('routrinnnn herrr')
+    let keywordListing = new KeywordCollections(keyword)
+    keywordListing.fetch().then(function(serverRes){
+      console.log(serverRes)
+      let keywordListingResults= serverRes.results
+      let viewInstance= new NavBarView()
+
+      viewInstance.render(keywordListingResults)
+
+
+    })
+  }
+
+
 
 
 		})

@@ -10,17 +10,21 @@
 
 .navbar-container a {
 	display: inline-block;
-	width: 10%;
+	width: 8%;
 	text-decoration: none;
 	color: #afacac;
 	font-size: 14px;
 }
 
-.navbar-container i {
+.navbar-container .fa-shopping-cart {
 	color: black;
 	font-size: 20px;
 }
 
+.navbar-container .fa-search{
+	font-size: 20px;
+	margin-right: 30px;
+}
 
 
 .navbar-container {
@@ -30,10 +34,8 @@
 	padding-left: 20px;
 }
 
-.mysize{
-	max-height: 380px;
-	padding: 10px;
-}
+
+
 
 .active-icon img {
 	max-height: 300px;
