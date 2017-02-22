@@ -52,7 +52,8 @@ url: '',
 
 export const CategoryCollections = Backbone.Collection.extend({
   initialize: function(category){
-      this.url=`https://openapi.etsy.com/v2/categories/` + category + `?api_key=ucswpi9i99uxq0fpk32d9296`
+    this.url=`https://api.etsy.com/v2/listings/active.json?api_key=ucswpi9i99uxq0fpk32d9296&category=` + category + `&includes=Images,Shop`
+      // this.url=`https://openapi.etsy.com/v2/categories/` + category + `?api_key=ucswpi9i99uxq0fpk32d9296`
   },
 
 //   parse: function(rawServerRes){

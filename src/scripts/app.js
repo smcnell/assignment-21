@@ -57,6 +57,7 @@ const AppRouter = Backbone.Router.extend({
   showByCategory: function(category){
     let categoryListing = new CategoryCollections(category)
     categoryListing.fetch().then(function(serverRes){
+      console.log(serverRes)
       let categoryListingResults= serverRes.results
       let viewInstance= new CategoryItemsView()
 
