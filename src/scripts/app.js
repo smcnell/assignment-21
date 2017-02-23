@@ -74,8 +74,10 @@ const AppRouter = Backbone.Router.extend({
     console.log('routrinnnn herrr')
     let keywordListing = new KeywordCollections(keyword)
     keywordListing.fetch().then(function(serverRes){
-      console.log(serverRes)
+      console.log("You still here?")
+      // console.log(serverRes)
       let keywordListingResults= serverRes.results
+      console.log(keywordListingResults)
       let viewInstance= new NavBarView()
 
       viewInstance.render(keywordListingResults)

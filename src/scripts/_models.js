@@ -75,8 +75,10 @@ url: '',
 
 export const KeywordCollections = Backbone.Collection.extend({
   initialize: function(keyword){
-    this.url=`https://openapi.etsy.com/v2/listings/active.js?api_key=aavnvygu0h5r52qes74x9zvo&keywords=`+ keyword +`&callback=`
+    this.url=`https://openapi.etsy.com/v2/listings/active/?includes=Images,Shop/User.json&api_key=aavnvygu0h5r52qes74x9zvo&keywords=${keyword}`
   },
+  // https://openapi.etsy.com/v2/listings/active.js?api_key=aavnvygu0h5r52qes74x9zvo&keywords=`+ keyword +`&callback=`
+// https://openapi.etsy.com/v2/listings/active.json?api_key=aavnvygu0h5r52qes74x9zvo&keywords=
 
 //   parse: function(rawServerRes){
 //   console.log('parsing Response')

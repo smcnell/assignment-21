@@ -3,7 +3,8 @@ export const NavBarView = Backbone.View.extend({
   el: '.navbar-container',
 
   events: {
-      "click .fa-search" : "handleTheSearch"
+      "click .fa-search" : "handleTheSearch",
+      "click .active-icon" : "handleIconClick"
   },
 
   handleTheSearch: function(evt){
@@ -23,54 +24,56 @@ export const NavBarView = Backbone.View.extend({
   },
 
 
-_eachListingTemplate: function(listOfActive){
-  let image = listOfActive.Images
-  var oneImage=image[0]
-  if(typeof oneImage!=="undefined"){
-    oneImage=image[0]
-  } else {
-    oneImage=""
-  }
-  let title=listOfActive.title
-    if (title.length > 30){
-      title=title.substr(0,30)+ "..."
+  _eachListingTemplate: function(listOfActive){
+    let image = listOfActive.Images
+    // console.log(typeof image[0])
+    // var oneImage=image[0]
+    if(typeof image[0]==="undefined"){
+      var oneImage=""
+    } else {
+      oneImage=image[0]
     }
+    let title=listOfActive.title
+      if (title.length > 30){
+        title=title.substr(0,30)+ "..."
+      }
 
-//   console.log(image)
-// console.log(oneImage)
-  return `
-  <div class="col-sm-6 col-md-4 mysize" >
-  <div class="thumbnail active-icon" data-itemid="${listOfActive.listing_id}"">
-    <img src="${oneImage.url_570xN}" alt="...">
-    <div class="caption">
-      <h3>${title}</h3>
-      <div class="pricename">
-        <p class="shoppy">${listOfActive.Shop.shop_name}</p>
-        <p class="pricey">$${listOfActive.price}</p>
+  //   console.log(image)
+  // console.log(oneImage)
+    return `
+    <div class="col-sm-6 col-md-4 mysize" >
+    <div class="thumbnail active-icon" data-itemid="${listOfActive.listing_id}"">
+      <img src="${oneImage.url_570xN}" alt="...">
+      <div class="caption">
+        <h3>${title}</h3>
+        <div class="pricename">
+          <p class="shoppy">${listOfActive.Shop.shop_name}</p>
+          <p class="pricey">$${listOfActive.price}</p>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-  `
-},
-
-
-
-  _buildActiveHtmlTemplate: function(listOfActive){
-console.log(listOfActive, "ajs;ldfkja;lksdjf;l")
-    return `
-    <div class="row">
-      ${listOfActive.map (this._eachListingTemplate).join('')}
-      </div>
-
-
+    </div>
     `
   },
 
-  render: function(listOfActive){
-    this.el.innerHTML=this._buildActiveHtmlTemplate(listOfActive)
-  }
-})
+
+
+    _buildActiveHtmlTemplate: function(listOfActive){
+  console.log(listOfActive)
+      return `
+      <div class="row">
+        ${listOfActive.map (this._eachListingTemplate).join('')}
+        </div>
+
+
+      `
+    },
+
+    render: function(listOfActive){
+      this.el.innerHTML=this._buildActiveHtmlTemplate(listOfActive)
+    }
+  })
+
 
 
 
@@ -93,9 +96,10 @@ export const ActiveListingsView= Backbone.View.extend({
 
 _eachListingTemplate: function(listOfActive){
   let image = listOfActive.Images
-  var oneImage=image[0]
-  if(typeof oneImage!=="undefined"){
-    oneImage=image[0]
+  // console.log(typeof image[0])
+  // var oneImage=image[0]
+  if(typeof image[0]!=="undefined"){
+    var oneImage=image[0]
   } else {
     oneImage=""
   }
