@@ -35,11 +35,21 @@
 }
 
 
-
-
-.active-icon img {
-	max-height: 300px;
+.thumbnail{
+    width: 100%;
+    height: 500px;
+    overflow: auto;
 }
+
+.thumbnail img{
+    width: 100%;
+    height: auto;
+    display: block;
+	}
+
+// .active-icon img {
+// 	max-height: 300px;
+// }
 
 .caption h3 {
 	font-size: 14px;

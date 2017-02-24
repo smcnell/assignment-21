@@ -1,7 +1,10 @@
 import $ from 'jquery'
 import Backbone from 'backbone'
 import {ActiveListingsCollection, SingleListingsCollection, CategoryCollections, KeywordCollections} from './_models.js'
-import {ActiveListingsView, SingleItemView, CategoryItemsView, KeywordItemsView, NavBarView} from './_views.js'
+import { NavBarView} from './_views.js'
+import {ActiveListingsView} from './_activeviews.js'
+import {SingleItemView} from './_singleview.js'
+import {CategoryItemsView} from './_categoryviews.js'
 // console.log('wired up')
 // console.log($)
 // console.log(Backbone)
@@ -72,9 +75,11 @@ const AppRouter = Backbone.Router.extend({
 
   showByKeyword: function(keyword){
     console.log('routrinnnn herrr')
+    let searchTerm = keyword.split('+').join(' ')
     let keywordListing = new KeywordCollections(keyword)
     keywordListing.fetch().then(function(serverRes){
       console.log("You still here?")
+
       // console.log(serverRes)
       let keywordListingResults= serverRes.results
       console.log(keywordListingResults)
